@@ -1,0 +1,17 @@
+pandas
+numpy
+scikit-learn
+email-validator
+beautifulsoup4
+tldextract
+validators
+fastapi
+uvicorn
+pydantic
+python-dotenv
+joblib
+jupyter
+matplotlib
+seaborn
+requests
+lxml
