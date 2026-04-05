@@ -10,35 +10,20 @@ app = FastAPI(title="Phishing Detection API")
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # change later for security
+    allow_origins=["*"],  # You can restrict later for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ----------- DEBUG + MODEL LOADING -----------
+# ----------- MODEL LOADING -----------
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-print("📁 BASE_DIR:", BASE_DIR)
-print("📂 Files in BASE_DIR:", os.listdir(BASE_DIR))
-
-models_path = os.path.join(BASE_DIR, "models")
-
-if os.path.exists(models_path):
-    print("📂 Files in models folder:", os.listdir(models_path))
-else:
-    print("❌ models folder NOT found!")
-
-model_path = os.path.join(models_path, "phishing_xgb_model.pkl")
-vectorizer_path = os.path.join(models_path, "tfidf_vectorizer.pkl")
-
-print("🔍 Model path:", model_path)
-print("🔍 Vectorizer path:", vectorizer_path)
+MODEL_FILE = "models/phishing_xgb_model.pkl"
+VECTORIZER_FILE = "models/tfidf_vectorizer.pkl"
 
 try:
-    model = joblib.load(model_path)
-    vectorizer = joblib.load(vectorizer_path)
+    model = joblib.load(MODEL_FILE)
+    vectorizer = joblib.load(VECTORIZER_FILE)
     print("✅ Model and vectorizer loaded successfully")
 except Exception as e:
     print("❌ ERROR LOADING MODEL:", e)
